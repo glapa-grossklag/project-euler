@@ -5,8 +5,7 @@
 multiples :: [Int]
 multiples = [n | n <- [1..999], n `mod` 3 == 0 || n `mod` 5 == 0]
 
--- | The sum of all multiples
--- | (233168)
+-- | 233168
 solution :: Int
 solution = sum multiples
 
