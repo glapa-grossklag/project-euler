@@ -26,3 +26,10 @@ factorial n = product [1..n]
 
 slice :: Int -> Int -> [a] -> [a]
 slice from to l = take (to - from + 1) (drop from l)
+
+-- | Wilson's Theorem
+isprime :: Integral a => a -> Bool
+isprime n = factorial (n-1) `mod` n == n-1
+
+primes :: [Integer]
+primes = [n | n <- [2..], isprime n]
