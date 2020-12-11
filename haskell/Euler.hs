@@ -18,10 +18,17 @@ digits n =
 fibs :: [Integer]
 fibs = 1 : 2 : zipWith (+) fibs (tail fibs)
 
--- | The list of divisors of n
 divisors :: Integral a => a -> [a]
 divisors n =
-    [d | d <- [1..n], n `mod` d == 0]
+    divisors' n 1 n
+
+divisors' :: Integral a => a -> a -> a -> [a]
+divisors' n low high =
+    let divs = [divisor | divisor <- [(low+1)..(ceiling . sqrt . fromIntegral) (high-1)], n `mod` divisor == 0]
+    in  if null divs
+            then [low, high]
+        else
+            low : (divisors' n (head divs) (n `div` head divs)) ++ [high]
 
 factorial :: Integral a => a -> a
 factorial n = product [1..n]
