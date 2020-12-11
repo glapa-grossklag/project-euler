@@ -1,9 +1,11 @@
 module Euler (
-digits,
-fibs,
-divisors,
-factorial,
-slice
+    digits,
+    fibs,
+    divisors,
+    factorial,
+    slice,
+    isprime,
+    primes
 ) where
 
 -- | The list of digits of an Integral
@@ -27,9 +29,9 @@ factorial n = product [1..n]
 slice :: Int -> Int -> [a] -> [a]
 slice from to l = take (to - from + 1) (drop from l)
 
--- | Wilson's Theorem
+-- | Primality test using trial division
 isprime :: Integral a => a -> Bool
-isprime n = factorial (n-1) `mod` n == n-1
+isprime n = all (\x -> n `mod` x /= 0) [2..(floor . sqrt . fromIntegral) n]
 
 primes :: [Integer]
 primes = [n | n <- [2..], isprime n]
